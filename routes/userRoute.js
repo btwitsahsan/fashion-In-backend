@@ -12,4 +12,5 @@ router.patch("/updateUser", protect, updateUser)
 router.patch("/updatePhoto", protect, updatePhoto)
 router.post("/checkLoginStatus", checkLoginStatus)
 
+
 module.exports = router;

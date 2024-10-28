@@ -41,11 +41,13 @@ const userSchema = mongoose.Schema({
     type: Object,
     required: [true, "please add an address"],
     default: {
-      street: "N/A",
-      city: "N/A",
-      zipcode: "N/A",
+      address: "N/A",
+      state: "N/A",
+      country: "N/A",
     },
   },
+},{
+  timestamps: true,
 });
 
 userSchema.pre("save", async function (next) {
