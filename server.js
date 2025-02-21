@@ -15,7 +15,7 @@ app.use(cookieParser());
 app.use(express.urlencoded({extended: false}));
 app.use(
     cors({
-      origin: ["http://localhost:3000","https://chat-web-frontend-rho.vercel.app"],
+      origin: ["http://localhost:3000","https://fashion-in-frontend.vercel.app"],
       credentials: true, // ✅ Required to send cookies
       allowedHeaders: ["Content-Type", "Authorization"],
       methods: ["GET", "POST", "PUT", "DELETE"],
