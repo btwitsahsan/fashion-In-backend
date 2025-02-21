@@ -45,7 +45,7 @@ const registerUser = expressAsyncHandler(async (req, res) => {
       httpOnly: true,
       expires: new Date(Date.now() + 1000 * 86400),
       secure: true,
-      sameSite : none,
+      sameSite : "None",
     });
     res.status(201).json({
       _id,
@@ -88,7 +88,7 @@ const loginUser = expressAsyncHandler(async (req, res) => {
       httpOnly: true,
       expires: new Date(Date.now() + 1000 * 86400),
       secure: true,
-      sameSite : none,
+      sameSite : "None",
     });
     res.status(201).json(newUser);
   } else {
@@ -103,7 +103,7 @@ const logout = expressAsyncHandler(async (req, res) => {
     httpOnly: true,
     expires: new Date(0),
     secure: true,
-    sameSite : none,
+    sameSite : "None",
   });
   res.status(200).json({ message: "User Successfully Logged-out..." });
 });
