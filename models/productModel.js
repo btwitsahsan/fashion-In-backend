@@ -7,12 +7,12 @@ const productSchema = mongoose.Schema(
       required: [true, "please add a name"],
       trim: true,
     },
-    sku: {
-      type: String,
-      required: true,
-      default: "SKU",
-      trim: true,
-    },
+    // sku: {
+    //   type: String,
+    //   required: true,
+    //   default: "SKU",
+    //   trim: true,
+    // },
     category: {
       type: String,
       required: [true, "please add a category"],
@@ -39,11 +39,11 @@ const productSchema = mongoose.Schema(
       default: 0,
       trim: true,
     },
-    regularPrice: {
-      type: Number,
-      // required: [true, "please add a name"],
-      trim: true,
-    },
+    // regularPrice: {
+    //   type: Number,
+    //   // required: [true, "please add a name"],
+    //   trim: true,
+    // },
     price: {
       type: Number,
       required: [true, "please add a price"],

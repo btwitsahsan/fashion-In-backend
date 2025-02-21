@@ -44,8 +44,8 @@ const registerUser = expressAsyncHandler(async (req, res) => {
       path: "/",
       httpOnly: true,
       expires: new Date(Date.now() + 1000 * 86400),
-      // secure: true,
-      // sameSite : none,
+      secure: true,
+      sameSite : none,
     });
     res.status(201).json({
       _id,
@@ -87,8 +87,8 @@ const loginUser = expressAsyncHandler(async (req, res) => {
       path: "/",
       httpOnly: true,
       expires: new Date(Date.now() + 1000 * 86400),
-      // secure: true,
-      // sameSite : none,
+      secure: true,
+      sameSite : none,
     });
     res.status(201).json(newUser);
   } else {
@@ -102,8 +102,8 @@ const logout = expressAsyncHandler(async (req, res) => {
     path: "/",
     httpOnly: true,
     expires: new Date(0),
-    // secure: true,
-    // sameSite : none,
+    secure: true,
+    sameSite : none,
   });
   res.status(200).json({ message: "User Successfully Logged-out..." });
 });
@@ -126,8 +126,12 @@ const checkLoginStatus = expressAsyncHandler(async (req, res) => {
   // Verify Token
   const verified = await jwt.verify(token, process.env.JWT_SECRET);
 
-  if (verified) {
-    return res.json(true);
+  const user = await User.findById(verified.id);
+
+
+  if (verified && user) {
+    return res.json({success:true, user});
+
   } else {
     return res.json(false);
   }

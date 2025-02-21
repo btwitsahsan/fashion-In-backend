@@ -35,7 +35,9 @@ app.use(errorHandler);
 
 
 mongoose
-.connect(process.env.MONGO_URI)
+.connect(process.env.MONGO_URI, {
+    dbName: "FashionIn"
+})
 .then(()=>{
     app.listen(PORT, ()=>{
         console.log(`server running on port ${PORT}`)

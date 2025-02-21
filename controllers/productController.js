@@ -1,19 +1,27 @@
 const expressAsyncHandler = require("express-async-handler");
 const Product = require("../models/productModel");
 const { default: mongoose } = require("mongoose");
+const User = require("../models/userModel");
+
+const dashboard = expressAsyncHandler(async (req, res) => {
+  const productCount = await Product.countDocuments();
+  const userCount = await User.countDocuments();
+  res.status(201).json({productCount, userCount});
+});
+
+
+
 
 const createProduct = expressAsyncHandler(async (req, res) => {
   const {
     name,
-    sku,
     category,
     brand,
     quantity,
     description,
     image,
-    regularPrice,
     price,
-    color,
+    color
   } = req.body;
 
   if (!name || !category || !brand || !quantity || !price || !description) {
@@ -23,13 +31,11 @@ const createProduct = expressAsyncHandler(async (req, res) => {
 
   const product = await Product.create({
     name,
-    sku,
     category,
     brand,
     quantity,
     description,
     image,
-    regularPrice,
     price,
     color,
   });
@@ -38,9 +44,17 @@ const createProduct = expressAsyncHandler(async (req, res) => {
 });
 
 const getProducts = expressAsyncHandler(async (req, res) => {
-  const products = await Product.find().sort("-createdAt");
+  const category = req.query.category;
+  let products;
+  if(category){
+     products = await Product.find({category}).sort("-createdAt");
+  }else{
+     products = await Product.find().sort("-createdAt");
+  }
   res.status(201).json(products);
 });
+
+
 const getProduct = expressAsyncHandler(async (req, res) => {
   const product = await Product.findById(req.params.id);
   if (!product) {
@@ -59,7 +73,7 @@ const deleteProduct = expressAsyncHandler(async (req, res) => {
   }
   await Product.findByIdAndDelete(req.params.id);
 
-  res.status(200).json({ message: "Product Deleted" });
+  res.status(200).json({ message: "Product Deleted" , product});
 });
 
 // Update Product
@@ -71,10 +85,10 @@ const updateProduct = expressAsyncHandler(async (req, res) => {
     quantity,
     description,
     image,
-    regularPrice,
     price,
     color,
-  } = req.body;
+  } = req.body.product;
+
 
   const product = await Product.findById(req.params.id);
   if (!product) {
@@ -92,7 +106,6 @@ const updateProduct = expressAsyncHandler(async (req, res) => {
       quantity,
       description,
       image,
-      regularPrice,
       price,
       color,
     },
@@ -189,6 +202,7 @@ const updateReview = expressAsyncHandler(async (req, res) => {
 
 
 module.exports = {
+  dashboard,
   createProduct,
   getProducts,
   getProduct,
