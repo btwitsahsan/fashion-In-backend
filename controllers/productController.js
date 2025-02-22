@@ -10,8 +10,6 @@ const dashboard = expressAsyncHandler(async (req, res) => {
 });
 
 
-
-
 const createProduct = expressAsyncHandler(async (req, res) => {
   const {
     name,
