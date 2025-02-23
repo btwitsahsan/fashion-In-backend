@@ -17,6 +17,7 @@ const createProduct = expressAsyncHandler(async (req, res) => {
     brand,
     quantity,
     description,
+    isFeatured,
     image,
     price,
     color
@@ -33,6 +34,7 @@ const createProduct = expressAsyncHandler(async (req, res) => {
     brand,
     quantity,
     description,
+    isFeatured,
     image,
     price,
     color,

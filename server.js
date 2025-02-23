@@ -19,7 +19,7 @@ app.use(
       origin: ["http://localhost:3000","https://fashion-in-frontend.vercel.app"],
       credentials: true, // ✅ Required to send cookies
       allowedHeaders: ["Content-Type", "Authorization"],
-      methods: ["GET", "POST", "PUT", "DELETE"],
+      methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     })
   );
 
